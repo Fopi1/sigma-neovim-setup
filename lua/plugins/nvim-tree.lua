@@ -2,6 +2,17 @@ return {
 	"nvim-tree/nvim-tree.lua",
 	opts = {
 		view = { width = 30, side = "left", preserve_window_proportions = true },
+		filters = {
+			dotfiles = false,
+			git_clean = false,
+			no_buffer = false,
+			custom = { "node_modules", ".git" },
+			exclude = { ".env", ".env.local" },
+		},
+		git = {
+			enable = true,
+			ignore = false,
+		},
 		update_focused_file = { enable = true, update_root = true },
 		sync_root_with_cwd = true,
 		respect_buf_cwd = true,

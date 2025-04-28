@@ -19,6 +19,15 @@ keymap("n", "<C-k>", "<C-w>k", { desc = "Верхний буфер", silent = tr
 keymap("n", "<C-l>", "<C-w>l", { desc = "Правый буфер", silent = true, noremap = true })
 keymap("n", "<leader>nh", "<cmd>nohl<CR>")
 keymap("n", "<C-s>", "<cmd>w<CR>", { desc = "Сохранить файл", silent = true, noremap = true })
+keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
+keymap("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
+keymap("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
+keymap("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
+-- Terminal
+keymap("t", "<C-c>", function()
+	vim.api.nvim_chan_send(vim.b.terminal_job_id, "\x03")
+end, { noremap = true, silent = true })
+keymap("t", "<C-q>", "<C-\\><C-n>", { desc = "Выйти из терминала", silent = true, noremap = true })
 
 vim.api.nvim_create_user_command("MessagesBuf", function()
 	local output = vim.api.nvim_exec("messages", true)
