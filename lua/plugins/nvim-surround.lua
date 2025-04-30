@@ -1,1 +1,1 @@
-return { "kylechui/nvim-surround", event = "VeryLazy", opts = {} }
+return { "kylechui/nvim-surround", event={"BufReadPost"}, opts = {} }

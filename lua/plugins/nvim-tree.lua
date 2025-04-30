@@ -1,7 +1,14 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	opts = {
-		view = { width = 30, side = "left", preserve_window_proportions = true },
+		disable_netrw = true,
+		view = {
+			width = 35,
+			side = "left",
+			preserve_window_proportions = true,
+			number = true,
+			relativenumber = true,
+		},
 		filters = {
 			dotfiles = false,
 			git_clean = false,
@@ -15,14 +22,11 @@ return {
 		},
 		update_focused_file = { enable = true, update_root = true },
 		sync_root_with_cwd = true,
-		respect_buf_cwd = true,
 		renderer = {
+			indent_width = 1,
 			icons = {
 				show = {
-					file = true,
-					folder = true,
-					folder_arrow = true,
-					git = true,
+					hidden = true,
 				},
 			},
 		},

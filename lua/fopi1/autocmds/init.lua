@@ -18,5 +18,5 @@ autocmd("InsertLeave", {
 })
 
 autocmd("InsertEnter", {
-	callback = functions.writeLastLocale,
+	callback = functions.setLastLocale,
 })
