@@ -1,6 +1,5 @@
 local functions = require("fopi1.autocmds.autocmds-functions")
 local autocmd = vim.api.nvim_create_autocmd
-
 autocmd("VimLeavePre", {
 	callback = functions.writeLastDirPath,
 })

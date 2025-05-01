@@ -1,5 +1,8 @@
 local paths = require("fopi1.env.paths")
 local keymap = vim.keymap.set
+local function is_dir(path)
+	return vim.fn.filereadable(path) == 1 or vim.fn.isdirectory(path) == 1
+end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -19,15 +22,28 @@ keymap(
 )
 keymap("n", "<leader>ef", "<cmd>NvimTreeFocus<CR>", { desc = "Фокус дерева файлов", silent = true })
 keymap("n", "<leader>er", function()
-	require("nvim-tree.api").tree.change_root(vim.fn.expand("%:p:h"))
-end, { desc = "Сделать root текущей папкой" })
+	local node = require("nvim-tree.api").tree.get_node_under_cursor()
+	if node and node.type == "directory" then
+		require("nvim-tree.api").tree.change_root(node.absolute_path)
+	else
+		print("Наведи курсор на папку в nvim-tree")
+	end
+end, { desc = "Сделать root выбранную папку в nvim-tree" })
 -- Base mappings
 keymap("n", "<C-h>", "<C-w>h", { desc = "Левый буфер", silent = true, noremap = true })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Нижний буфер", silent = true, noremap = true })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Верхний буфер", silent = true, noremap = true })
 keymap("n", "<C-l>", "<C-w>l", { desc = "Правый буфер", silent = true, noremap = true })
 keymap("n", "<leader>nh", "<cmd>nohl<CR>")
-keymap("n", "<C-s>", "<cmd>w<CR>", { desc = "Сохранить файл", silent = true, noremap = true })
+keymap({ "n", "i" }, "<C-s>", "<cmd>w<CR>", { desc = "Сохранить файл", silent = true, noremap = true })
+keymap(
+	"n",
+	"<leader>bb",
+	"<cmd>bd<CR>",
+	{ desc = "Закрыть и сохранить буфер", silent = true, noremap = true }
+)
+keymap("n", "<leader>bf", "<cmd>bd!<CR>", { desc = "Закрыть буфер", silent = true, noremap = true })
+-- Lsp
 keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
 keymap("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
 keymap("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
@@ -58,19 +74,20 @@ end, {})
 vim.api.nvim_create_user_command("E", function(opts)
 	local key = opts.args
 	local path = paths[key]
-	if path then
-		vim.cmd("e " .. path)
+	if path and is_dir(path) then
+		vim.cmd.edit(path)
 	else
-		print("Unknown alias: " .. key)
+		print("Unknown or invalid alias: " .. key)
 	end
 end, { nargs = 1 })
 
 vim.api.nvim_create_user_command("CD", function(opts)
 	local key = opts.args
 	local path = paths[key]
-	if path then
-		vim.cmd("cd " .. path)
+
+	if path and is_dir(path) then
+		vim.cmd.cd(path)
 	else
-		print("Unknown alias: " .. key)
+		print("Unknown or invalid alias: " .. key)
 	end
 end, { nargs = 1 })

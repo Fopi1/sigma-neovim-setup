@@ -1,18 +1,26 @@
+local action_state = require("telescope.actions.state")
 return {
 	"nvim-telescope/telescope.nvim",
-  cmd = {"Telescope"},
+	cmd = { "Telescope" },
 	tag = "0.1.8",
 	dependencies = { "nvim-lua/plenary.nvim" },
-	config = function()
-		require("telescope").setup({
-			defaults = {
-				layout_config = { horizontal = { width = 0.9 } },
-				mappings = {
-					i = {
-						["<C-h>"] = "which_key",
-					},
+	opts = {
+		defaults = {
+			layout_config = { horizontal = { width = 0.9 } },
+			mappings = {
+				i = {
+					["<C-x>"] = function(prompt_bufnr)
+						local entry = action_state.get_selected_entry()
+						vim.api.nvim_buf_delete(entry.bufnr, { force = true })
+					end,
+				},
+				n = {
+					["dd"] = function(prompt_bufnr)
+						local entry = action_state.get_selected_entry()
+						vim.api.nvim_buf_delete(entry.bufnr, { force = true })
+					end,
 				},
 			},
-		})
-	end,
+		},
+	},
 }

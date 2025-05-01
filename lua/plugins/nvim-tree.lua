@@ -10,15 +10,14 @@ return {
 			relativenumber = true,
 		},
 		filters = {
-			dotfiles = false,
-			git_clean = false,
-			no_buffer = false,
-			custom = { "node_modules", ".git" },
+			dotfiles = true,
+			custom = { "node_modules" },
 			exclude = { ".env", ".env.local" },
 		},
 		git = {
 			enable = true,
 			ignore = false,
+			timeout = 500,
 		},
 		update_focused_file = { enable = true, update_root = true },
 		sync_root_with_cwd = true,
