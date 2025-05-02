@@ -8,7 +8,7 @@ return {
 	opts = {
 		keymap = { preset = "default", ["<Tab>"] = { "select_and_accept" }, ["<C-l>"] = { "show" } },
 		appearance = {
-			nerd_font_variant = "normal",
+			nerd_font_variant = "mono",
 		},
 		completion = {
 			documentation = { treesitter_highlighting = true },
