@@ -26,6 +26,7 @@ M.initialLoad = function()
 	vim.cmd("resize 8")
 	vim.cmd("terminal")
 	vim.cmd("wincmd k")
+	vim.cmd("hi MatchParen gui=underline guifg=#ffcc00 guibg=NONE")
 end
 M.saveWhenLeaveBuffer = function()
 	if vim.bo.modified and vim.fn.expand("%") ~= "" then

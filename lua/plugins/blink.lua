@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = { "BufReadPost" },
+	event = { "BufReadPre" },
 	dependencies = { "rafamadriz/friendly-snippets" },
 	version = "1.*",
 	---@module "blink-cmp"
@@ -12,11 +12,16 @@ return {
 		},
 		completion = {
 			documentation = { treesitter_highlighting = true },
+			list = {
+				selection = { auto_insert = false },
+			},
 			menu = {
 				draw = {
+					treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", gap = 1 },
 						{ "kind_icon", "kind" },
+						{ "source_name" },
 					},
 				},
 			},

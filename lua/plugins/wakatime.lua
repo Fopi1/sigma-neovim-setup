@@ -1,1 +1,1 @@
-return { "wakatime/vim-wakatime", event = "VeryLazy" }
+return { "wakatime/vim-wakatime", event = { "VeryLazy" } }
