@@ -1,6 +1,8 @@
-local paths = require("fopi1.env.paths")
-local keymap = vim.keymap.set
+local safeRequire = require("functions.safeRequire")
+
+local paths = safeRequire("fopi1.env.paths")
 local userCommandsLabels = { "CD", "LCD", "E" }
+local keymap = vim.keymap.set
 local function is_dir(path)
 	return vim.fn.filereadable(path) == 1 or vim.fn.isdirectory(path) == 1
 end
@@ -72,18 +74,19 @@ vim.api.nvim_create_user_command("MessagesBuf", function()
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, "\n"))
 end, {})
 
-local createUserCommands = function()
-	for _, value in pairs(userCommandsLabels) do
-		vim.api.nvim_create_user_command(value, function(opts)
-			local key = opts.args
-			local path = paths[key]
-			if path and is_dir(path) then
-				vim.cmd(string.lower(value) .. " " .. path)
-			else
-				print("Unknown or invalid alias: " .. key)
-			end
-		end, { nargs = 1 })
+if paths then
+	local createUserCommands = function()
+		for _, value in ipairs(userCommandsLabels) do
+			vim.api.nvim_create_user_command(value, function(opts)
+				local key = opts.args
+				local path = paths[key]
+				if path and is_dir(path) then
+					vim.cmd(string.lower(value) .. " " .. path)
+				else
+					print("Unknown or invalid alias: " .. key)
+				end
+			end, { nargs = 1 })
+		end
 	end
+	createUserCommands()
 end
-
-createUserCommands()

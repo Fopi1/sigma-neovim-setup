@@ -15,6 +15,8 @@ opt.expandtab = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.swapfile = false
+opt.termguicolors = true
+opt.laststatus = 3
 
 local function escape(str)
 	local escape_chars = [[;,."|\]]

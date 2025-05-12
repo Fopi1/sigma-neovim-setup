@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	event = { "BufReadPre" },
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = { "rafamadriz/friendly-snippets", "Kaiser-Yang/blink-cmp-avante" },
 	version = "1.*",
 	---@module "blink-cmp"
 	---@type blink.cmp.Config
@@ -28,12 +28,19 @@ return {
 		},
 		signature = { enabled = true },
 		sources = {
-			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+			default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer" },
 			providers = {
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
 					score_offset = 100,
+				},
+				avante = {
+					module = "blink-cmp-avante",
+					name = "Avante",
+					opts = {
+						-- options for blink-cmp-avante
+					},
 				},
 			},
 		},

@@ -13,9 +13,9 @@ autocmd("BufWinLeave", {
 })
 
 autocmd("InsertLeave", {
-	callback = functions.writeLastLocale,
+	callback = functions.changeLastLocale or function() end,
 })
 
 autocmd("InsertEnter", {
-	callback = functions.setLastLocale,
+	callback = functions.setLastLocale or function() end,
 })
