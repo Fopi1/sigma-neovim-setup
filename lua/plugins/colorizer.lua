@@ -6,5 +6,6 @@ return {
 		"typescript",
 		css = { css = true, css_fn = true },
 		html = { names = false },
+		"lua",
 	},
 }
