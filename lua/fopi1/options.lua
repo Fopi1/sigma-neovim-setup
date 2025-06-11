@@ -10,13 +10,18 @@ opt.number = true
 opt.relativenumber = true
 opt.shiftwidth = 2
 opt.tabstop = 2
-opt.expandtab = true
+opt.expandtab = false
 
 opt.ignorecase = true
 opt.smartcase = true
 opt.swapfile = false
 opt.termguicolors = true
 opt.laststatus = 3
+opt.wrap = false
+
+vim.api.nvim_set_hl(0, "MarkdownFieldName", { fg = "#ff5555", bold = true })
+vim.api.nvim_set_hl(0, "MarkdownFieldNick", { fg = "#ffcc00", italic = true })
+vim.api.nvim_set_hl(0, "MarkdownFieldLink", { fg = "#00aaff", underline = true })
 
 local function escape(str)
 	local escape_chars = [[;,."|\]]

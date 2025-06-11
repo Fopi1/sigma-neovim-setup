@@ -28,10 +28,40 @@ keymap("n", "<leader>er", function()
 	local node = require("nvim-tree.api").tree.get_node_under_cursor()
 	if node and node.type == "directory" then
 		require("nvim-tree.api").tree.change_root(node.absolute_path)
+		vim.cmd("cd " .. node.absolute_path)
 	else
 		print("Наведи курсор на папку в nvim-tree")
 	end
 end, { desc = "Сделать root выбранную папку в nvim-tree" })
+
+keymap("n", "<leader>eo", function()
+	local uv = vim.loop
+	local api = require("nvim-tree.api")
+	local node = api.tree.get_node_under_cursor()
+	if not node then
+		print("Наведи курсор на папку в nvim-tree")
+		return
+	end
+
+	-- получаем путь и, если это файл, берём его директорию
+	local path = node.absolute_path
+	if node.type == "file" then
+		path = vim.fn.fnamemodify(path, ":h")
+	end
+
+	if vim.fn.isdirectory(path) == 0 then
+		print("Не директория: " .. path)
+		return
+	end
+
+	-- Windows Explorer понимает только backslashes
+	local win_path = path:gsub("/", "\\")
+
+	uv.spawn("explorer.exe", {
+		args = { win_path },
+		detached = true,
+	}, function(code, signal) end)
+end, { desc = "Открыть выбранную папку в проводнике" })
 -- Base mappingsl
 keymap("n", "<C-h>", "<C-w>h", { desc = "Левый буфер", silent = true, noremap = true })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Нижний буфер", silent = true, noremap = true })

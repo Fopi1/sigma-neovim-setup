@@ -16,13 +16,6 @@ return {
 	config = function()
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		local lspconfig = require("lspconfig")
-		local function is_angular_project()
-			return vim.fn.glob("angular.json") ~= ""
-		end
-
-		local function is_vue_project()
-			return vim.fn.glob("vue.config.*") ~= "" or vim.fn.glob("*.vue") ~= ""
-		end
 		local servers = {
 			lua_ls = {
 				settings = {
@@ -33,28 +26,7 @@ return {
 					},
 				},
 			},
-			pyright = {
-				settings = {
-					python = {
-						analysis = {
-							autoSearchPaths = false,
-							typeCheckingMode = "basic",
-						},
-					},
-				},
-			},
-			html = {},
-			cssls = {},
-			emmet_ls = {},
-			prismals = {},
-			jsonls = {},
-			tailwindcss = {},
-			intelephense = {},
-			ts_ls = {},
 		}
-		if not (is_angular_project() or is_vue_project()) then
-			servers.ts_ls = nil
-		end
 		local function on_attach(client, bufnr)
 			local opts = { noremap = true, silent = true, buffer = bufnr }
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
