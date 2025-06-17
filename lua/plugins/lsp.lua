@@ -26,7 +26,48 @@ return {
 					},
 				},
 			},
+			emmet_ls = {
+				filetypes = {},
+				on_new_config = function(config, root_dir)
+					local util = require("lspconfig.util")
+					if util.root_pattern("angular.json")(root_dir) then
+						config.filetypes = {
+							"html",
+							"css",
+							"scss",
+							"typescript",
+							"typescriptreact",
+							"javascriptreact",
+						}
+					else
+						config.filetypes = {
+							"html",
+							"css",
+							"scss",
+						}
+					end
+				end,
+			},
+			pyright = {
+				root_dir = require("lspconfig.util").root_pattern("pyrightconfig.json", ".git"),
+				settings = {
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							diagnosticMode = "workspace",
+							useLibraryCodeForTypes = true,
+						},
+					},
+				},
+			},
+			ts_ls = {},
+			cssls = {},
+			tailwindcss = {},
+			jsonls = {},
+			prismals = {},
+			angularls = {},
 		}
+
 		local function on_attach(client, bufnr)
 			local opts = { noremap = true, silent = true, buffer = bufnr }
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)

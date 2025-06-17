@@ -7,5 +7,7 @@ return {
 		css = { css = true, css_fn = true },
 		html = { names = false },
 		"lua",
+		"scss",
+		"sass",
 	},
 }
