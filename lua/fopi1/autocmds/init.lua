@@ -11,11 +11,3 @@ autocmd("VimEnter", {
 autocmd("BufWinLeave", {
 	callback = functions.saveWhenLeaveBuffer,
 })
-
-autocmd("InsertLeave", {
-	callback = functions.changeLastLocale or function() end,
-})
-
-autocmd("InsertEnter", {
-	callback = functions.setLastLocale or function() end,
-})

@@ -31,19 +31,4 @@ M.saveWhenLeaveBuffer = function()
 		vim.cmd("w")
 	end
 end
-if paths then
-	M.changeLastLocale = function()
-		local savedLocale = vim.fn.system(paths.imselect)
-		if savedLocale ~= "1033" then
-			vim.fn.writefile({ savedLocale }, localePath)
-		end
-		vim.fn.system(paths.imselect .. " 1033")
-	end
-	M.setLastLocale = function()
-		local loadedLocale = vim.fn.filereadable(localePath) == 1 and vim.fn.readfile(localePath)[1] or ""
-		if loadedLocale ~= "" then
-			vim.fn.system(paths.imselect .. " " .. loadedLocale)
-		end
-	end
-end
 return M

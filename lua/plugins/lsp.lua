@@ -26,28 +26,6 @@ return {
 					},
 				},
 			},
-			emmet_ls = {
-				filetypes = {},
-				on_new_config = function(config, root_dir)
-					local util = require("lspconfig.util")
-					if util.root_pattern("angular.json")(root_dir) then
-						config.filetypes = {
-							"html",
-							"css",
-							"scss",
-							"typescript",
-							"typescriptreact",
-							"javascriptreact",
-						}
-					else
-						config.filetypes = {
-							"html",
-							"css",
-							"scss",
-						}
-					end
-				end,
-			},
 			pyright = {
 				root_dir = require("lspconfig.util").root_pattern("pyrightconfig.json", ".git"),
 				settings = {
@@ -60,12 +38,41 @@ return {
 					},
 				},
 			},
-			ts_ls = {},
-			cssls = {},
-			tailwindcss = {},
 			jsonls = {},
-			prismals = {},
-			angularls = {},
+			asm_lsp = {
+				cmd = { "asm-lsp" },
+				filetypes = { "asm", "S", "s" },
+				root_dir = require("lspconfig.util").root_pattern("*.asm", "Makefile"),
+				settings = {
+					asm = {
+						assembler = "nasm",
+						instruction_se = { "x86/x86-64" },
+					}
+				}
+			},
+			tailwindcss = {},
+			ts_ls = {},
+			emmet_ls = {
+				filetypes = {},
+				on_new_config = function(config, root_dir)
+					local util = require("lspconfig.util")
+					if util.root_pattern("angular.json")(root_dir) then
+						config.filetypes = {
+							"html",
+							"css",
+							"scss",
+							"typescriptreact",
+							"javascriptreact",
+						}
+					else
+						config.filetypes = {
+							"html",
+							"css",
+							"scss",
+						}
+					end
+				end,
+			},
 		}
 
 		local function on_attach(client, bufnr)

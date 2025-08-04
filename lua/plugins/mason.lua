@@ -12,6 +12,12 @@ return {
 	},
 	config = function(_, opts)
 		require("mason").setup(opts)
+		require("mason-lspconfig").setup({
+			automatic_enable = {
+				"ruff",
+				"asmfmt"
+			}
+		})
 	end,
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
