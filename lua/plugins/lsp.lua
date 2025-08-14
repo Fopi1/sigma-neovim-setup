@@ -47,8 +47,8 @@ return {
 					asm = {
 						assembler = "nasm",
 						instruction_se = { "x86/x86-64" },
-					}
-				}
+					},
+				},
 			},
 			tailwindcss = {},
 			ts_ls = {},
@@ -73,6 +73,7 @@ return {
 					end
 				end,
 			},
+			clangd = {},
 		}
 
 		local function on_attach(client, bufnr)
