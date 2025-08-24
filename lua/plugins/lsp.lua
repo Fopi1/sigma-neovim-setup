@@ -53,7 +53,6 @@ return {
 			tailwindcss = {},
 			ts_ls = {},
 			emmet_ls = {
-				filetypes = {},
 				on_new_config = function(config, root_dir)
 					local util = require("lspconfig.util")
 					if util.root_pattern("angular.json")(root_dir) then
@@ -73,7 +72,6 @@ return {
 					end
 				end,
 			},
-			clangd = {},
 		}
 
 		local function on_attach(client, bufnr)
