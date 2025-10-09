@@ -15,8 +15,8 @@ return {
 		require("mason-lspconfig").setup({
 			automatic_enable = {
 				"ruff",
-				"asmfmt"
-			}
+				"asmfmt",
+			},
 		})
 	end,
 	dependencies = {

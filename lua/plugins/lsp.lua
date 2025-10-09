@@ -72,6 +72,7 @@ return {
 					end
 				end,
 			},
+			clangd = {},
 		}
 
 		local function on_attach(client, bufnr)

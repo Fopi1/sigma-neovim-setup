@@ -20,11 +20,9 @@ return {
 							local entry = action_state.get_selected_entry()
 							vim.api.nvim_buf_delete(entry.bufnr, { force = true })
 						end,
-
 					},
 				},
 			},
-
 		}
-	end
+	end,
 }
