@@ -20,6 +20,11 @@ M.initialLoad = function()
 	vim.cmd("tabnew")
 	vim.cmd("terminal")
 	vim.cmd("tabnext")
+	vim.api.nvim_set_hl(0, "MarkdownFieldName", { fg = "#ff5555", bold = true })
+	vim.api.nvim_set_hl(0, "MarkdownFieldNick", { fg = "#ffcc00", italic = true })
+	vim.api.nvim_set_hl(0, "MarkdownFieldLink", { fg = "#00aaff", underline = true })
+	vim.api.nvim_set_hl(0, "MatchParen", { fg = "#ffcc00", underline = true, bg = "NONE" })
+	vim.api.nvim_set_hl(0, "@markup.strong", { fg = "#b175b8", bold = true })
 end
 
 M.saveWhenLeaveBuffer = function()
