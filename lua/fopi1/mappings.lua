@@ -1,8 +1,7 @@
-local safeRequire = require("functions.safeRequire")
-
-local paths = safeRequire("fopi1.env.paths")
+local paths = require("fopi1.env.paths") or ""
 local userCommandsLabels = { "CD", "LCD", "E" }
 local keymap = vim.keymap.set
+
 local function is_dir(path)
 	return vim.fn.filereadable(path) == 1 or vim.fn.isdirectory(path) == 1
 end
