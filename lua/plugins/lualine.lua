@@ -3,5 +3,5 @@ return {
 	lazy = false,
 	priority = 900,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = {},
+	opts = { options = { theme = "onedark" } },
 }

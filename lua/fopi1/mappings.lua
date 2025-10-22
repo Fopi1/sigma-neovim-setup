@@ -9,6 +9,12 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+keymap(
+	"n",
+	"<leader>ns",
+	"<cmd> e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>",
+	{ desc = "Открыть настройки neovim", silent = true, noremap = true }
+)
 keymap("n", "<leader>d", vim.diagnostic.open_float)
 -- Tekescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Поиск файлов" })
@@ -53,7 +59,6 @@ keymap("n", "<leader>eo", function()
 		return
 	end
 
-	-- Windows Explorer понимает только backslashes
 	local win_path = path:gsub("/", "\\")
 
 	uv.spawn("explorer.exe", {
@@ -61,26 +66,80 @@ keymap("n", "<leader>eo", function()
 		detached = true,
 	}, function(code, signal) end)
 end, { desc = "Открыть выбранную папку в проводнике" })
--- Base mappingsl
+-- Moving
 keymap("n", "<C-h>", "<C-w>h", { desc = "Левый буфер", silent = true, noremap = true })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Нижний буфер", silent = true, noremap = true })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Верхний буфер", silent = true, noremap = true })
 keymap("n", "<C-l>", "<C-w>l", { desc = "Правый буфер", silent = true, noremap = true })
-keymap("n", "<leader>nh", "<cmd>nohl<CR>")
-keymap({ "n", "i" }, "<C-s>", "<cmd>w<CR>", { desc = "Сохранить файл", silent = true, noremap = true })
+-- Moving tabs
 keymap(
 	"n",
-	"<leader>bb",
+	"<C-S-h",
+	"<C-w><S-h>",
+	{ desc = "Перенести буфер вправо", silent = true, noremap = true }
+)
+keymap("n", "<C-S-j", "<C-w><S-j>", { desc = "Перенести буфер вниз", silent = true, noremap = true })
+keymap(
+	"n",
+	"<C-S-k",
+	"<C-w><S-k>",
+	{ desc = "Перенести буфер вверх", silent = true, noremap = true }
+)
+keymap(
+	"n",
+	"<C-S-l",
+	"<C-w><S-l>",
+	{ desc = "Перенести буфер влево", silent = true, noremap = true }
+)
+-- Base Mappings
+keymap("n", "<leader>nh", "<cmd>nohl<CR>")
+keymap({ "n", "i" }, "<C-s>", "<cmd>w<CR>", { desc = "Сохранить файл", silent = true, noremap = true })
+-- Buffers
+keymap(
+	"n",
+	"<leader>bq",
 	"<cmd>if &modified == 1 | w | endif<CR><cmd>bd<CR>",
 	{ desc = "Закрыть и сохранить буфер", silent = true, noremap = true }
 )
-keymap("n", "<leader>bf", "<cmd>bd!<CR>", { desc = "Закрыть буфер", silent = true, noremap = true })
+keymap("n", "<leader>bd", "<cmd>bw!<CR>", { desc = "Закрыть буфер", silent = true, noremap = true })
+keymap(
+	"n",
+	"<leader>bb",
+	"<cmd>new<CR>",
+	{ desc = "Создать новый буфер", silent = true, noremap = true }
+)
+-- Insert Mode
 keymap("i", "<C-z>", "<Esc>ui", { desc = "Ctrl - Z в insert моде", noremap = true, silent = true })
 -- Lsp
 keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
 keymap("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
 keymap("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
 keymap("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
+-- Session Manager
+keymap(
+	"n",
+	"<leader>ss",
+	"<cmd>SessionManager save_current_session<CR>",
+	{ desc = "Сохранить текущую сессию", noremap = true, silent = true }
+)
+keymap(
+	"n",
+	"<leader>so",
+	"<cmd>SessionManager load_session<CR>",
+	{ desc = "Загрузить сессию на выбор", noremap = true, silent = true }
+)
+keymap(
+	"n",
+	"<leader>sl",
+	"<cmd>SessionManager load_last_session<CR>",
+	{ desc = "Загрузить последнюю сессию", noremap = true, silent = true }
+)
+keymap(
+	"n",
+	"<leader>sd",
+	"<cmd>SessionManager delete_session<CR>",
+	{ desc = "Удалить сессию на выбор", noremap = true, silent = true }
+)
 -- Tabs
 keymap("n", "<leader>ts", "<cmd>tabs<CR>", { desc = "Показать все табы", silent = true, noremap = true })
 keymap(

@@ -12,14 +12,6 @@ M.writeLastDirPath = function()
 end
 
 M.initialLoad = function()
-	local lastDir = vim.fn.readfile(lastDirPath)[1] or ""
-	if lastDir ~= "" then
-		vim.cmd("silent! cd " .. lastDir)
-	end
-	vim.cmd("NvimTreeToggle")
-	vim.cmd("tabnew")
-	vim.cmd("terminal")
-	vim.cmd("tabnext")
 	vim.api.nvim_set_hl(0, "MarkdownFieldName", { fg = "#ff5555", bold = true })
 	vim.api.nvim_set_hl(0, "MarkdownFieldNick", { fg = "#ffcc00", italic = true })
 	vim.api.nvim_set_hl(0, "MarkdownFieldLink", { fg = "#00aaff", underline = true })
@@ -32,4 +24,9 @@ M.saveWhenLeaveBuffer = function()
 		vim.cmd("w")
 	end
 end
+
+M.afterSessionLoaded = function()
+	vim.cmd("NvimTreeOpen")
+end
+
 return M
