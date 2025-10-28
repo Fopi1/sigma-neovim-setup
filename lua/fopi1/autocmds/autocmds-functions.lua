@@ -1,17 +1,10 @@
 local M = {}
--- Local variables
-local lastDirPath = vim.fn.stdpath("data") .. "/fopi1/last_dir.txt"
---
-M.writeLastDirPath = function()
-	if vim.v.dying < 2 then
-		local dir = vim.fn.fnamemodify(lastDirPath, ":h")
-		vim.fn.mkdir(dir, "p")
-		local cwd = vim.fn.getcwd()
-		vim.fn.writefile({ cwd }, lastDirPath)
-	end
-end
 
+local status_ok, paths = pcall(require, "fopi1.env.paths")
 M.initialLoad = function()
+	if status_ok then
+		vim.cmd("cd" .. paths.works_path)
+	end
 	vim.api.nvim_set_hl(0, "MarkdownFieldName", { fg = "#ff5555", bold = true })
 	vim.api.nvim_set_hl(0, "MarkdownFieldNick", { fg = "#ffcc00", italic = true })
 	vim.api.nvim_set_hl(0, "MarkdownFieldLink", { fg = "#00aaff", underline = true })
@@ -27,6 +20,9 @@ end
 
 M.afterSessionLoaded = function()
 	vim.cmd("NvimTreeOpen")
+	vim.cmd("tabnew")
+	vim.cmd("terminal")
+	vim.cmd("tabnext")
 end
 
 return M
