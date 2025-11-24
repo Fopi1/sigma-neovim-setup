@@ -14,7 +14,7 @@ return {
 				icon = "",
 				label = "Settings",
 			},
-			{ key = "e", command = "<cmd>e<CR>", icon = "", label = "New File" },
+			{ key = "e", command = "<cmd>enew<CR>", icon = "", label = "New File" },
 			{ key = "l", command = "<cmd>SessionManager load_session<CR>", icon = "", label = "Load Session" },
 			{ key = "f", command = "<cmd>Telescope find_files<CR>", icon = "", label = "Find File" },
 			{ key = "q", command = "<cmd>qa<CR>", icon = "", label = "Quit NVIM" },

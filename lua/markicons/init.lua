@@ -27,11 +27,11 @@ function M.insert(icon)
 end
 
 function M.setup()
-	bindkeymap("check", "ic")
-	bindkeymap("cross", "ix")
-	bindkeymap("warning", "iw")
-	bindkeymap("progress", "ip")
-	bindkeymap("deprecated", "id")
+	bindkeymap("check", "mc")
+	bindkeymap("cross", "mx")
+	bindkeymap("warning", "mw")
+	bindkeymap("progress", "mp")
+	bindkeymap("deprecated", "md")
 end
 
 return M

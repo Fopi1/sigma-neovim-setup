@@ -15,7 +15,6 @@ return {
 	},
 	config = function()
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
-		local lspconfig = require("lspconfig")
 		local servers = {
 			lua_ls = {
 				settings = {
@@ -73,6 +72,7 @@ return {
 				end,
 			},
 			clangd = {},
+			rust_analyzer = {},
 		}
 
 		local function on_attach(client, bufnr)
@@ -80,10 +80,12 @@ return {
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		end
 		for name, opts in pairs(servers) do
-			lspconfig[name].setup(vim.tbl_deep_extend("force", {
+			vim.lsp.config(name, {
 				capabilities = capabilities,
 				on_attach = on_attach,
-			}, opts))
+				opts,
+			})
+			vim.lsp.enable(name)
 		end
 	end,
 }

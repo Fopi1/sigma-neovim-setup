@@ -3,7 +3,7 @@ local M = {}
 local status_ok, paths = pcall(require, "fopi1.env.paths")
 M.initialLoad = function()
 	if status_ok then
-		vim.cmd("cd" .. paths.works_path)
+		vim.cmd("cd " .. paths.works_path)
 	end
 	vim.api.nvim_set_hl(0, "MarkdownFieldName", { fg = "#ff5555", bold = true })
 	vim.api.nvim_set_hl(0, "MarkdownFieldNick", { fg = "#ffcc00", italic = true })
