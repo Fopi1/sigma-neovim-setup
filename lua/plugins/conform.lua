@@ -15,6 +15,7 @@ return {
 			htmldjango = { "djlint" },
 			python = { "ruff_format" },
 			cpp = { "clang-format" },
+			text = { "prettierd", "prettier" },
 		},
 		format_on_save = {
 			timeout_ms = 500,

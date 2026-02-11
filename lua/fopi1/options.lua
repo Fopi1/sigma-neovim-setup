@@ -19,6 +19,7 @@ opt.termguicolors = true
 opt.laststatus = 3
 opt.wrap = false
 
+vim.o.lazyredraw = false
 
 local function escape(str)
 	local escape_chars = [[;,."|\]]

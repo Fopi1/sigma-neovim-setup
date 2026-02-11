@@ -1,5 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
+	event = { "VeryLazy" },
 	opts = {
 		disable_netrw = true,
 		view = {
@@ -18,7 +19,7 @@ return {
 			ignore = false,
 			timeout = 1000,
 		},
-		update_focused_file = { enable = true, update_root = true },
+		update_focused_file = { enable = true },
 		sync_root_with_cwd = true,
 		respect_buf_cwd = true,
 		renderer = {
